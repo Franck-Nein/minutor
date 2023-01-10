@@ -85,14 +85,21 @@ void SearchChunksDialog::on_pb_search_clicked()
 
 void SearchChunksDialog::displayResultsOfSingleChunk(QSharedPointer<SearchPluginI::ResultListT> results)
 {
-  if (results) {
-    for (const auto& result: *results) {
-      ui->resultList->addResult(result);
+    if (!results) {
+        return;
     }
-  }
+    QFile file("output.txt");
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append))
+        return;
 
-  addOneToProgress();
+    QTextStream out(&file);
+    for (const auto& result : *results) {
+        out << result.name << " x: " << result.pos.x() << " y: " << result.pos.y() << " z: " << result.pos.z() << endl;
+    }
+    file.close();
+    addOneToProgress();
 }
+
 
 void SearchChunksDialog::addOneToProgress()
 {
