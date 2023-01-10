@@ -1,3 +1,5 @@
+Hacky bypass for block limit(Writes to output.txt)
+--------------------------------------------------
 This is the source code for Minutor 2.1
 web/ contains the source code for the web-based pack builder.  The live version
 can be found at http://seancode.com/minutor/packs
